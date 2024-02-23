@@ -3,8 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import get_object_or_404
 
-from .models import My_shoes
-from .serializers import My_shoesSerializer
+from .models import My_shoes, Review
+from .serializers import My_shoesSerializer, ReviewSerializer
 
 @api_view(['GET', 'POST'])
 def my_shoes_list(request):
@@ -35,3 +35,17 @@ def my_shoes_detail(request, pk):
     elif request.method == 'DELETE':
         my_shoes.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+@api_view(['GET', 'POST'])
+def review_list(request, pk):
+    my_shoes = get_object_or_404(My_shoes, pk=pk)
+    if request.method == 'GET':
+        reviews = Review.objects.filter(my_shoes=my_shoes)
+        serialzer = ReviewSerializer(reviews, many=True)
+        return Response(serialzer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        serializer = ReviewSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(my_shoes=my_shoes)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

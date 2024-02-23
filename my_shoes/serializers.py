@@ -1,15 +1,11 @@
 from rest_framework import serializers
-from .models import My_shoes
+from .models import My_shoes, Review
 
-class My_shoesSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    brand = serializers.CharField(max_length=100)
-    model_name = serializers.CharField(max_length=100)
-    model_num = serializers.CharField(max_length=50)
-    release_date = serializers.DateField()
-    release_price = serializers.IntegerField()
-    purchase_date = serializers.DateField()
-    purchase_price = serializers.IntegerField()
+class My_shoesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = My_shoes
+        fields = ['id', 'brand', 'model_name', 'model_num', 'release_date', 'release_price', 'purchase_date', 'purchase_price']
+
 
     def create(self, validated_data):
         return My_shoes.objects.create(**validated_data)
@@ -24,3 +20,11 @@ class My_shoesSerializer(serializers.Serializer):
         instance.purchase_price = validated_data.get('purchase_price', instance.purchase_price)
         instance.save()
         return instance
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ['id', 'my_shoes', 'username', 'star', 'comment', 'created']
+        extra_kwargs = {
+            'my_shoes' : {'read_only':True},
+        }
