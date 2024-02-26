@@ -2,9 +2,11 @@ from rest_framework import serializers
 from .models import My_shoes, Review
 
 class My_shoesSerializer(serializers.ModelSerializer):
+    my_shoes_reviews = serializers.PrimaryKeyRelatedField(source='reviews', many=True, read_only=True)
+    
     class Meta:
         model = My_shoes
-        fields = ['id', 'brand', 'model_name', 'model_num', 'release_date', 'release_price', 'purchase_date', 'purchase_price']
+        fields = ['id', 'brand', 'model_name', 'model_num', 'release_date', 'release_price', 'purchase_date', 'purchase_price', 'my_shoes_reviews']
 
 
     def create(self, validated_data):
@@ -22,9 +24,8 @@ class My_shoesSerializer(serializers.ModelSerializer):
         return instance
 
 class ReviewSerializer(serializers.ModelSerializer):
+    my_shoes = serializers.StringRelatedField()
+
     class Meta:
         model = Review
         fields = ['id', 'my_shoes', 'username', 'star', 'comment', 'created']
-        extra_kwargs = {
-            'my_shoes' : {'read_only':True},
-        }

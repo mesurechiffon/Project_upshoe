@@ -9,8 +9,11 @@ class My_shoes(models.Model):
     purchase_date = models.DateField()
     purchase_price = models.IntegerField()
 
+    def __str__(self):
+        return self.model_name
+
 class Review(models.Model):
-    my_shoes = models.ForeignKey(My_shoes, on_delete=models.CASCADE)
+    my_shoes = models.ForeignKey(My_shoes, on_delete=models.CASCADE, related_name = 'reviews')
     username = models.CharField(max_length=30)
     star = models.IntegerField()
     comment = models.CharField(max_length=100)
