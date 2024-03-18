@@ -1,0 +1,54 @@
+[
+  {
+    "model":"my_shoes.My_shoes",
+    "pk":1,
+    "fields":{
+        "brand":"NIKE",
+        "model_name":"Nike x Peaceminusone Air Force 1 Low Para-Noise 2.0",
+        "model_num":"DD3223-100",
+        "release_date":"2020-11-25",
+        "release_price":219000,
+        "purchase_date":"2020-12-24",
+        "purchase_price":635000     
+    }
+  },
+  {
+    "model":"my_shoes.My_shoes",
+    "pk":2,
+    "fields":{
+      "brand":"NIKE",
+      "model_name":"Nike x Peaceminusone Kwondo1 White",
+      "model_num":"DH2482-100",
+      "release_date":"2021-12-03",
+      "release_price":219000,
+      "purchase_date":"2022-07-29",
+      "purchase_price":313000      
+    }
+  },
+  {
+    "model":"my_shoes.My_shoes",
+    "pk":3,
+    "fields":{
+      "brand":"NIKE",
+      "model_name":"Nike x Supreme Air Force 1 Low Black",
+      "model_num":"CU9225-001",
+      "release_date":"2020-03-05",
+      "release_price":157300,
+      "purchase_date":"2022-10-15",
+      "purchase_price":298300      
+    }
+  },
+  {
+    "model":"my_shoes.My_shoes",
+    "pk":4,
+    "fields":{
+      "brand":"NIKE",
+      "model_name":"Nike x Stussy Air Penny 2 Black",
+      "model_num":"DQ5674-001",
+      "release_date":"2022-12-20",
+      "release_price":239000,
+      "purchase_date":"2023-02-07",
+      "purchase_price":261000   
+    }
+  }
+]
